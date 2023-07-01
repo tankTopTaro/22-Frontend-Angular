@@ -1,0 +1,29 @@
+<div class="container appointment-container shadow-lg">
+    <div class="back container pt-5 px-4 text-start" (click)="goBack()">
+        <div class="d-flex gap-2">
+            <i class="bi bi-arrow-left"></i> <span class="fw-bold">Back</span>
+        </div>
+    </div>
+    <div class="container py-5 px-4">
+        <h1>Bath & Grooming</h1>
+        <span class="small">Please select from the options below</span>
+        <div class="container d-flex flex-column gap-3 mt-4">
+            <div class="border services" *ngFor="let category of categories" (click)="onSelect(category)">
+                <div class="d-flex flex-column me-2">
+                    <span class="big">{{ category.service }}</span>
+                    <span class="small">{{ category.description }}</span>
+                    <ng-container *ngIf="category.id === 4">
+                        <span class="small">{{ category.prices.small | currency:'PHP' }}</span>
+                    </ng-container>
+                    <ng-container *ngIf="category.id !== 4">
+                        <span class="small">Small = {{ category.prices.small | currency:'PHP' }}, Large = {{ category.prices.large | currency:'PHP'  }}</span>
+                    </ng-container>
+                </div>
+                <div>
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
