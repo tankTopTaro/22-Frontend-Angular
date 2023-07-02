@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-/* import { DataService } from '../data.service'; */
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-select-date-time',
@@ -91,10 +91,16 @@ export class SelectDateTimeComponent implements OnInit {
   currentDateIndex: number = -1;
 
   disableButton: boolean = true;
+  isLoading: boolean = true;
 
-  /* _data: any[] = []; */
+  _data: any[] = [];
+  _timeslots: any[] = [];
+  morningTimeslots: any[] = [];
+  afternoonTimeslots: any[] = [];
+  eveningTimeslots: any[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, /* private _dataService: DataService */) { 
+
+  constructor(private router: Router, private route: ActivatedRoute, private _dataService: DataService) { 
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
@@ -131,9 +137,74 @@ export class SelectDateTimeComponent implements OnInit {
       })
       
       // Mock API
-      /* this._dataService.fetchData().subscribe((data) => {
-        this._data = data
-      }) */
+      this._dataService.fetchData().subscribe((data) => {
+        this.isLoading = false;
+        this._data = data;
+        this.extractTimeslots();
+        this.convertTo24HourFormat(this.afternoonTimeslots);
+        this.convertTo24HourFormat(this.eveningTimeslots);
+        this.getMorningSlots();
+        this.getAfternoonSlots();
+        this.getEveningSlots();
+        console.log(this.eveningTimeslots)
+      }, 
+      error => {
+        console.error('Error fetching data:', error);
+        this.isLoading = false;
+      }
+    );
+  }
+
+  extractTimeslots() {
+    const uniqueSlots = new Map();
+    for (let day of this._data[0].operatingDays) {
+      for (let timeslot of day.timeslot) {
+        const timeKey = timeslot.hmsFormat.hours + ':' + timeslot.hmsFormat.minutes;
+        uniqueSlots.set(timeKey, timeslot);
+      }
+    }
+    this._timeslots = Array.from(uniqueSlots.values());
+  }
+
+  convertTo24HourFormat(timeslots: any[]) {
+    for (let time of timeslots) {
+      if (time.hmsFormat.hours < 12 && time.hmsFormat.hours !== 0) {
+        time.hmsFormat.hours +=12;
+      }
+    }
+  }
+
+  sortTimeslots(timeslots: any[]): any[] {
+    const sortedSlots = [...timeslots];
+    sortedSlots.sort((a, b) => {
+      if (a.hmsFormat.hours === 12 && a.hmsFormat.minutes === 0) {
+        return -1;
+      }
+      if (b.hmsFormat.hours === 12 && b.hmsFormat.minutes === 0) {
+        return 1;
+      }
+      if (a.hmsFormat.hours === b.hmsFormat.hours) {
+        return a.hmsFormat.minutes - b.hmsFormat.minutes;
+      }
+      return a.hmsFormat.hours - b.hmsFormat.hours;
+    });
+    return sortedSlots; 
+  }
+
+  getMorningSlots() {
+    this.morningTimeslots = this._timeslots.filter(time => this.getAMPM(time.hmsFormat.hours) === 'AM');
+  }
+
+  getAfternoonSlots() {
+    this.afternoonTimeslots = this._timeslots.filter(time => {
+      return time.hmsFormat.hours >= 12 && time.hmsFormat.hours < 18;
+    })
+  }
+
+  getEveningSlots() {
+    this.eveningTimeslots = this._timeslots.filter(time => {
+      return time.hmsFormat.hours >= 18 && time.hmsFormat.hours <= 23;
+    })
   }
 
   goBack() {

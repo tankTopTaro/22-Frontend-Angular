@@ -39,23 +39,38 @@
                     <span class="small">SELECT TIMESLOT</span>
                 </div>
                 <div class="container mt-3 d-flex flex-column gap-5">
-                    <div>
-                        <div class="d-flex gap-2">
-                            <i class="bi bi-sun"></i><span class="fw-bold">Afternoon</span>
-                        </div>
-                        <div class="d-flex flex-wrap gap-3 text-center mt-3">
-                            <div class="timeslots" *ngFor="let time of timeslots.time.slice(0, 5)">
-                                <p>{{ formatTime(time.hmsFormat.hours) }}:{{ time.hmsFormat.minutes | number: '2.0-0' }} {{ getAMPM(time.hmsFormat.hours) }}</p>
+                    <div class="loading" *ngIf="isLoading">
+                        <img src="https://res.cloudinary.com/delgya5vj/image/upload/v1688276609/practical-exam/Angular/Timeslots_kdmzrz.png" alt="Timeslots">
+                    </div>
+                    <div *ngIf="!isLoading">
+                        <div>
+                            <div class="d-flex gap-2">
+                                <i class="bi bi-cloud-sun"></i><span class="fw-bold">Morning</span>
+                            </div>
+                            <div class="d-flex flex-wrap gap-3 text-center mt-3">
+                                <div class="timeslots" *ngFor="let time of morningTimeslots">
+                                    <p>{{ formatTime(time.hmsFormat.hours) }}:{{ time.hmsFormat.minutes | number: '2.0-0' }} {{ getAMPM(time.hmsFormat.hours) }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="d-flex gap-2">
-                            <i class="bi bi-cloud-moon"></i><span class="fw-bold">Evening</span>
+                        <div>
+                            <div class="d-flex gap-2 mt-4">
+                                <i class="bi bi-sun"></i><span class="fw-bold">Afternoon</span>
+                            </div>
+                            <div class="d-flex flex-wrap gap-3 text-center mt-3">
+                                <div class="timeslots" *ngFor="let time of sortTimeslots(afternoonTimeslots)">
+                                    <p>{{ formatTime(time.hmsFormat.hours) }}:{{ time.hmsFormat.minutes | number: '2.0-0' }} {{ getAMPM(time.hmsFormat.hours) }}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="d-flex flex-wrap gap-3 text-center mt-3">
-                            <div class="timeslots" *ngFor="let time of timeslots.time.slice(-2)">
-                                <p>{{ formatTime(time.hmsFormat.hours) }}:{{ time.hmsFormat.minutes | number: '2.0-0' }} {{ getAMPM(time.hmsFormat.hours) }}</p>
+                        <div>
+                            <div class="d-flex gap-2 mt-4">
+                                <i class="bi bi-cloud-moon"></i><span class="fw-bold">Evening</span>
+                            </div>
+                            <div class="d-flex flex-wrap gap-3 text-center mt-3">
+                                <div class="timeslots" *ngFor="let time of eveningTimeslots">
+                                    <p>{{ formatTime(time.hmsFormat.hours) }}:{{ time.hmsFormat.minutes | number: '2.0-0' }} {{ getAMPM(time.hmsFormat.hours) }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
