@@ -11,9 +11,10 @@ export class SelectDateTimeComponent implements OnInit {
   service: string ='';
   selectedService: string = '';
   dates: { month: string, date: number, day: string }[] = [];
+  currentDateIndex: number = -1;
 
   constructor(private router: Router, private route: ActivatedRoute) { 
-    const currentDate = new Date();
+    /* const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -29,7 +30,34 @@ export class SelectDateTimeComponent implements OnInit {
         date,
         day: dayFormatter.format(dateObj)
       };
-    })
+    }) */
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const currentDateValue = currentDate.getDate();
+
+    for (let month = currentMonth; month < 12; month++) {
+      const startDay = (month === currentMonth) ? currentDateValue : 1;
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      for (let date = startDay; date <= daysInMonth; date++) {
+        const dateObj = new Date(year, month, date);
+        const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'short' });
+        const dayFormatter = new Intl.DateTimeFormat('en-US', { weekday: 'long' });
+
+        const currentDate = {
+          month: monthFormatter.format(dateObj),
+          date,
+          day: dayFormatter.format(dateObj)
+        };
+
+        this.dates.push(currentDate);
+
+        if (month === currentMonth && date === currentDateValue) {
+          this.currentDateIndex = this.dates.length - 1;
+        }
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -37,6 +65,7 @@ export class SelectDateTimeComponent implements OnInit {
         this.selectedService = params['selectedService'];
         this.service = params['service'];
       })
+      console.log(this.dates);
   }
 
   goBack() {
