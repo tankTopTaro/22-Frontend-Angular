@@ -71,4 +71,27 @@ export class SelectDateTimeComponent implements OnInit {
   goBack() {
     this.router.navigate(['../../'], { relativeTo:this.route, queryParams: {service: this.service} });
   }
+
+  isCurrentDay(date: { month: string, date: number, day: string}): boolean {
+    const currentDate = new Date();
+    return (
+      date.month === currentDate.toLocaleString('en-US', { month: 'short' }) &&
+      date.date === currentDate.getDate()
+    );
+  }
+
+  isNextDay(date: { month: string, date: number, day: string }): boolean {
+    const nextDate = new Date();
+    nextDate.setDate(nextDate.getDate() + 1);
+  
+    return (
+      date.month === nextDate.toLocaleString('en-US', { month: 'short' }) &&
+      date.date === nextDate.getDate()
+    );
+  }
+
+  isWeekend(date: { month: string, date: number, day: string}): boolean {
+    const dayOfWeek = new Date(date.month + ' ' + date.date + ', ' + new Date().getFullYear()).getDay();
+    return dayOfWeek === 0 || dayOfWeek === 6; 
+  }
 }

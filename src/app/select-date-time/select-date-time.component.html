@@ -14,35 +14,28 @@
                 <span class="small">SELECT DATE</span>
                 <span class="action">Open Calendar</span>
             </div>
-            <!-- dates boxes
-            <div class="container mt-3">
-                <div class="d-flex gap-2">
-                    <div class="container d-flex flex-column date-box" *ngFor="let date of dates">
-                        <span>{{ date.month }}</span>
-                        <span class="big">{{ date.date }}</span>
-                        <span class="small">{{ date.day }}</span>
-                    </div>
-                    <div>
-                        <i class="bi bi-chevron-right"></i>
-                    </div>
-                </div>
-            </div>
-            -->
             <div class="container mt-3">
                 <div class="container-fluid">
                     <div class="slider-wrap">
                         <div class="d-flex gap-2 slider-main">
-                            <div class="container d-flex flex-column item date-box" *ngFor="let date of dates">
+                            <div 
+                                class="container d-flex flex-column item date-box" 
+                                *ngFor="let date of dates"
+                                [ngClass]="{'weekend' : isWeekend(date)}"
+                            >
                                 <span>{{ date.month }}</span>
                                 <span class="big">{{ date.date }}</span>
-                                <span class="small">{{ date.day }}</span>
+                                <span>{{ isCurrentDay(date) ? 'Today' : isNextDay(date) ? 'Tomorrow' : date.day }}</span>
                             </div>
                         </div>
-                        <div class="next-date" >
+                        <div class="next-date shadow-lg">
                             <span class="next" appNextDate><i class="bi bi-chevron-right"></i></span>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="container mt-5">
+                <span class="small">SELECT TIMESLOT</span>
             </div>
         </div>
     </div>
