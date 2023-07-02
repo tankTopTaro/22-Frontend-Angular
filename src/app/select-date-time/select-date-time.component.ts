@@ -156,14 +156,28 @@ export class SelectDateTimeComponent implements OnInit {
   }
 
   extractTimeslots() {
-    const uniqueSlots = new Map();
+    /* const uniqueSlots = new Map();
     for (let day of this._data[0].operatingDays) {
       for (let timeslot of day.timeslot) {
         const timeKey = timeslot.hmsFormat.hours + ':' + timeslot.hmsFormat.minutes;
         uniqueSlots.set(timeKey, timeslot);
       }
+    } 
+    this._timeslots = Array.from(uniqueSlots.values());*/
+
+    // Randomizer
+    if (this._data.length > 0) {
+      const randomId = Math.floor(Math.random() * this._data.length);
+      const uniqueSlots = new Map();
+
+      for (let day of this._data[randomId].operatingDays) {
+        for (let timeslot of day.timeslot) {
+          const timeKey = timeslot.hmsFormat.hours + ':' + timeslot.hmsFormat.minutes;
+          uniqueSlots.set(timeKey, timeslot);
+        }
+      }
+      this._timeslots = Array.from(uniqueSlots.values());
     }
-    this._timeslots = Array.from(uniqueSlots.values());
   }
 
   convertTo24HourFormat(timeslots: any[]) {
