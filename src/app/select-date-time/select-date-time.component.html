@@ -14,39 +14,36 @@
                 <span class="small">SELECT DATE</span>
                 <span class="action">Open Calendar</span>
             </div>
-            <!-- dates boxes -->
-            <div class="container">
+            <!-- dates boxes
+            <div class="container mt-3">
                 <div class="d-flex gap-2">
                     <div class="container d-flex flex-column date-box" *ngFor="let date of dates">
                         <span>{{ date.month }}</span>
                         <span class="big">{{ date.date }}</span>
                         <span class="small">{{ date.day }}</span>
                     </div>
+                    <div>
+                        <i class="bi bi-chevron-right"></i>
+                    </div>
                 </div>
             </div>
-            
-
-            <!-- Date Carousel this is not working 
-            <div id="dateCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active" *ngFor="let date of dates.slice(0, 6); let i = index" [ngClass]="{'active': i === 0}">
-                        <div class="container d-flex flex-column date-box">
-                            <span>{{ date.month }}</span>
-                            <span class="big">{{ date.date }}</span>
-                            <span class="small">{{ date.day }}</span>
+            -->
+            <div class="container mt-3">
+                <div class="container-fluid">
+                    <div class="slider-wrap">
+                        <div class="d-flex gap-2 slider-main">
+                            <div class="container d-flex flex-column item date-box" *ngFor="let date of dates">
+                                <span>{{ date.month }}</span>
+                                <span class="big">{{ date.date }}</span>
+                                <span class="small">{{ date.day }}</span>
+                            </div>
+                        </div>
+                        <div class="next-date" >
+                            <span class="next" appNextDate><i class="bi bi-chevron-right"></i></span>
                         </div>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#dateCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#dateCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>-->
-              
+            </div>
         </div>
     </div>
 </div>
