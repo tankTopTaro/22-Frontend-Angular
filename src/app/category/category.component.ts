@@ -12,7 +12,7 @@ export class CategoryComponent implements OnInit {
     { 
       "id": 1, 
       "service": "Pet Check-up",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesuada vitae vitae sem tortor."
+      "description": "Use mock api here"
     },
     { 
       "id": 2, 
@@ -32,11 +32,11 @@ export class CategoryComponent implements OnInit {
       
   }
 
-  onSelect(category: { service: string; }) {
-    if (category.service === "Bath & Grooming") {
-      this.router.navigate([category.service], {relativeTo: this.route});
+  onSelect(category: { id: number, service: string; }) {
+    if (category.id === 2) {
+      this.router.navigate([category.id], {relativeTo: this.route, queryParams: { service: category.service }});
     } else {
-      this.router.navigate(['/page-not-found'], );
+      this.router.navigate([`${category.id}/page-not-found`], {relativeTo: this.route} );
     }
   }
 }

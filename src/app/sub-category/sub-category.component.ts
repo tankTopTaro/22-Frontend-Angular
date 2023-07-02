@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -6,9 +6,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './sub-category.component.html',
   styleUrls: ['./sub-category.component.css']
 })
-export class SubCategoryComponent {
+export class SubCategoryComponent implements OnInit {
 
-  categories = [
+  public selectedService: string = '';
+  public showRouterOutlet: boolean = false;
+
+  subcategories = [
     { 
       "id": 1, 
       "service": "Bath & Brush",
@@ -37,11 +40,23 @@ export class SubCategoryComponent {
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
-  onSelect(category: { service: string; }) {
-    this.router.navigate([category.service], {relativeTo: this.route});
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.selectedService = params['service'];
+      this.showRouterOutlet = false;
+    })
   }
 
-  goBack() {
-    this.router.navigate(['../'], {relativeTo: this.route});
+  // Select Date Page
+  setDate(subcategory: { id: number, service: string; }) {
+    const categoryId = this.route.snapshot.paramMap.get('mainId');
+    const targetUrl = `/category/${categoryId}/${subcategory.id}/select-date`;
+
+    this.showRouterOutlet = true;
+
+    this.router.navigate([targetUrl], {
+      relativeTo: this.route,
+      queryParams: { service: this.selectedService, selectedService: subcategory.service }
+    })
   }
 }

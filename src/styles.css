@@ -33,6 +33,18 @@ h1, .big {
     border-radius: 50%;
 }
 
+.action {
+    color: #FE7401;
+}
+
+.date-box {
+    border: 1px solid #1e1e1e;
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    text-align: center;
+}
+
 .appointment-container {
     background-color: #fff;
     border-radius: 20px;
