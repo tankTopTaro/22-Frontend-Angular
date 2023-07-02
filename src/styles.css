@@ -91,6 +91,28 @@ h1, .big {
     border-radius: 20px;
 }
 
+.timeslots {
+    border: 1px solid #333;
+    padding: .5rem;
+    width: 170px;
+    border-radius: 8px;
+    height: 50px;
+    font-weight: 600;
+    padding-top: .7rem;
+}
+
+.button {
+    width: 100%;
+    height: 80px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: #A3A1B5;
+    background-color: #F3F6FC;
+    border: none;
+    border-radius: 8px;
+}
+
 .bi {
     font-size: large;
     color: #FE7401;
