@@ -108,10 +108,11 @@ export class SelectDateTimeComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, public _dataService: DataService, private modalService: NgbModal) { 
     const currentDate = new Date();
     this.currentMonth = currentDate.getMonth();
+
+    console.log(this.calendar)
   }
 
-  ngOnInit(): void {
-      
+  ngOnInit(): void {  
       // Mock API
     this._dataService.fetchData().subscribe((data) => {
         this.isLoading = false;

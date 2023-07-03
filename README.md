@@ -12,3 +12,7 @@
 
 ### Running the app
 ```ng serve --open``` or ```npm start```
+
+## BUGS
+
+1. When selecting dates from calendar from date-box slider or calendar it will select all dates that have the same number as the one the user selected. But it will only store the one that the user clicked.

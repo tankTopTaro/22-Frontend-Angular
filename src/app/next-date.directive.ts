@@ -12,8 +12,6 @@ export class NextDateDirective {
     const el = this.elRef.nativeElement.parentElement.parentElement.children[0];
     const item = el.getElementsByClassName('item');
     const currentItem = item[0];
-
-    console.log(el.nextElementSibling)
     
     el.append(currentItem); 
   }

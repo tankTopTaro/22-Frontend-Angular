@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = '22-Frontend-Angular';
+  title = 'Petzania Animal Clinic';
+  address = 'BGC Taguig';
 
   constructor(private router: Router) {}
 
