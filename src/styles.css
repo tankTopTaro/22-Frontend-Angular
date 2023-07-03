@@ -268,7 +268,7 @@ textarea {
     height: 100vh;
 }
 .page-not-found {
-    min-height: 100vh;
+    min-height: 60vh;
 }
 
 .page-not-found a, .page-not-found span {
