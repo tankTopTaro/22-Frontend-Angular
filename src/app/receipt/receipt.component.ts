@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-summary',
-  templateUrl: './summary.component.html',
-  styleUrls: ['./summary.component.css']
+  selector: 'app-receipt',
+  templateUrl: './receipt.component.html',
+  styleUrls: ['./receipt.component.css']
 })
-export class SummaryComponent implements OnInit {
+export class ReceiptComponent implements OnInit {
+
   details_name: string = '';
   details_phone: string = '';
   details_email: string = '';
@@ -16,8 +17,10 @@ export class SummaryComponent implements OnInit {
   details_date: string | null = null;
   details_service: string = '';
   details_selectedService: string = '';
+
+  ref_num: string = '';
   
-  constructor(private router: Router, private route: ActivatedRoute, public _dataService: DataService) {
+  constructor(private router: Router, public _dataService: DataService) {
     this.details_service = this._dataService.details_service;
     this.details_selectedService = this._dataService.details_selectedService;
     this.details_date = this._dataService.details_date;
@@ -26,20 +29,15 @@ export class SummaryComponent implements OnInit {
     this.details_phone = this._dataService.details_phone;
     this.details_email = this._dataService.details_email;
     this.details_comments = this._dataService.details_comments;
+    this.ref_num = this._dataService.details_reference;
   }
 
   ngOnInit(): void {
       
   }
-
-  book() {
-    this.router.navigate(['/receipt'], { relativeTo:this.route, });
-  }
-
-  goBack() {
-    const mainId = this.route.snapshot.paramMap.get('mainId');
-    const subId = this.route.snapshot.paramMap.get('subId');
-    const targetUrl = `/category/${mainId}/${subId}/details-form`;
-    this.router.navigate([targetUrl], { relativeTo:this.route, });
+  
+  goHome() {
+    localStorage.clear();
+    this.router.navigate(['']);
   }
 }

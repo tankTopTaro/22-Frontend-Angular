@@ -23,6 +23,7 @@ export class DataService {
   details_date: string | null = '';
   details_service: string = '';
   details_selectedService: string = '';
+  details_reference: string = '';
 
   constructor(private http: HttpClient) { 
     this.selectedService = localStorage.getItem('selectedService') || ''; // Full Groom
@@ -40,6 +41,7 @@ export class DataService {
     this.details_date = localStorage.getItem('details_date') || '';
     this.details_service = localStorage.getItem('details_service') || '';
     this.details_selectedService = localStorage.getItem('details_selectedService') || '';
+    this.details_reference = localStorage.getItem('details_reference') || '';
   }
 
   fetchData(): Observable<any> {
@@ -56,6 +58,9 @@ export class DataService {
     this.details_service = details.service;
     this.details_selectedService = details.selectedService;
 
+    const ref = this.generateRandomString(10);
+    this.details_reference = ref;
+
     localStorage.setItem('details_name', details.name);
     localStorage.setItem('details_phone', details.phone);
     localStorage.setItem('details_email', details.email);
@@ -64,6 +69,7 @@ export class DataService {
     localStorage.setItem('details_timeslot', details.timeslot || '');
     localStorage.setItem('details_service', details.service);
     localStorage.setItem('details_selectedService', details.selectedService);
+    localStorage.setItem('details_reference', ref);
   }
 
   setSelectedService(value: string) {
@@ -98,17 +104,6 @@ export class DataService {
   }
   
   private formatTimeslot(timeslot: any): string {
-    /* 
-    const dateObj = new Date(timeslot.time);
-
-    console.log(dateObj);
-    const formattedTime = dateObj.toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric'
-    });
-    return formattedTime; */
-    console.log(timeslot)
-
     const hours = timeslot.hmsFormat.hours;
     const minutes = timeslot.hmsFormat.minutes;
     
@@ -127,4 +122,18 @@ export class DataService {
     return formattedTime;
   }
 
+  // Generate random reference number
+  generateRandomString(length: number): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const charactersLength = characters.length;
+    const randomValues = new Uint32Array(length);
+    crypto.getRandomValues(randomValues);
+  
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(randomValues[i] % charactersLength);
+    }
+  
+    return result;
+  }
 }

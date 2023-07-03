@@ -1,14 +1,29 @@
-<div class="container appointment-container shadow-lg">
-    <div class="back container pt-5 px-4 text-start" (click)="goBack()">
-        <div class="d-flex gap-2">
-            <i class="bi bi-arrow-left action"></i> <span class="fw-bold">Back</span>
+<div class="container d-flex p-3 appointment-container shadow-lg">
+    <div class="d-flex px-3">
+        <img src="https://res.cloudinary.com/delgya5vj/image/upload/v1688378135/practical-exam/Angular/img_pending_appointment_1_pez37a.png" alt="koala">
+    </div>
+    <div>
+        <div class="d-flex flex-column">
+            <h1>Appointment Approved!</h1>
+            <p>When your schedule approaches, you will be notified.
+                Please arrive 15 minutes before your scheduled time.</p>
+            <small>We have the rights to remove late or “no show” appointments.</small>
         </div>
     </div>
-    <div class="container">
-        <div class="container d-flex flex-column mt-4">
-            <h1>Summary</h1>
-            <span class="small fs-6">Please double check your entries before booking.</span>
+</div>
+
+<div class="container d-flex flex-column mt-5 p-3 appointment-container shadow-lg">
+    <div class="container d-flex flex-row justify-content-between p-3">
+        <div class="d-flex flex-column">
+            <small>Reference Number</small>
+            <span class="big">{{ ref_num }}</span>
         </div>
+        <div class="d-flex flex-column">
+            <small>Appointment Status</small>
+            <span class="big">Upcoming</span>
+        </div>
+    </div>
+    <div class="container summary">
         <div class="container d-flex flex-column mt-4">
             <span class="small fs-6">Selected Service</span>
             <span class="fw-semibold text-lg">{{ _dataService.details_service }} - {{ details_selectedService }}</span>
@@ -40,14 +55,15 @@
             </div>
         </div>
     </div>
-    <div class="container summary mt-3 pt-3 pb-5">
-        <div class="container pb-5">
+    <div class="container summary pt-3 pb-4">
+        <div class="container">
             <span class="small">Remarks</span>
             <p class="fw-semibold">{{ details_comments }}</p>
         </div>
-        <div class="container d-flex flex-column gap-4 align-items-center">
-            <small class="text-center">By booking an appointment, you agree to our <span class="terms-conditions">Terms &amp; Conditions</span></small>
-            <button class="submit" (click)="book()">Book Appointment</button>
-        </div>
     </div>
 </div>
+
+<div class="container text-center mt-5">
+    <span class="action" (click)="goHome()">Back to Home</span>
+</div>
+

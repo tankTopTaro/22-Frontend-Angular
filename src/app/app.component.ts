@@ -12,6 +12,7 @@ export class AppComponent {
   constructor(private router: Router) {}
 
   goHome() {
+    localStorage.clear();
     this.router.navigate(['']);
   }
 }
