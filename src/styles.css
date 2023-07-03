@@ -176,6 +176,12 @@ h1, .big {
     height: 50px;
     font-weight: 600;
     padding-top: .7rem;
+    cursor: pointer;
+}
+
+.enable {
+    background-color: #FE7401 !important;
+    color: #fff !important;
 }
 
 .button {

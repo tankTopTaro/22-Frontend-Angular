@@ -92,6 +92,7 @@ export class SelectDateTimeComponent implements OnInit {
   currentDateIndex: number = -1;
   currentMonth: number = 0;
   selectedDate: Date | null = null;
+  selectedTimeslot: any;
 
   disableButton: boolean = true;
   isLoading: boolean = true;
@@ -127,7 +128,6 @@ export class SelectDateTimeComponent implements OnInit {
         this.getMorningSlots();
         this.getAfternoonSlots();
         this.getEveningSlots();
-        console.log(this.currentMonth)
       }, 
       error => {
         console.error('Error fetching data:', error);
@@ -238,6 +238,7 @@ export class SelectDateTimeComponent implements OnInit {
     } else {
       this.selectedDate = selectedDate;
     }
+    console.log(this.selectedDate)
   }
 
   isDateSelected(date: { month: string, date: number, day: string }): boolean {
@@ -289,6 +290,18 @@ export class SelectDateTimeComponent implements OnInit {
     }
     
     return [];
+  }
+
+  selectTimeslot(time: any) {
+    this.selectedTimeslot = time;
+  }
+
+  isTimeSelected(time: any): boolean {
+    return this.selectedTimeslot === time;
+  }
+
+  isDateTimeSelected(): boolean {
+    return this.selectedDate && this.selectedTimeslot;
   }
 
   extractTimeslots() {
