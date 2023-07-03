@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-details-form',
@@ -8,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DetailsFormComponent {
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute, public _dataService: DataService) {}
 
   goBack() {
     const mainId = this.route.snapshot.paramMap.get('mainId');

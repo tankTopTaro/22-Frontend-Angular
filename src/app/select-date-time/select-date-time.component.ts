@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class SelectDateTimeComponent implements OnInit {
 
-  timeslots = {
+  /* timeslots = {
     time: [
       {
         "time": 46800000,
@@ -83,7 +83,7 @@ export class SelectDateTimeComponent implements OnInit {
         }
       }
     ]
-  };
+  }; */
   
 
   service: string ='';
@@ -105,16 +105,12 @@ export class SelectDateTimeComponent implements OnInit {
 
   calendar: { month: string, dates: { month: string, date: number, day: string }[], days: string[], year: number }[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, private _dataService: DataService, private modalService: NgbModal) { 
+  constructor(private router: Router, private route: ActivatedRoute, public _dataService: DataService, private modalService: NgbModal) { 
     const currentDate = new Date();
     this.currentMonth = currentDate.getMonth();
   }
 
   ngOnInit(): void {
-      this.route.queryParams.subscribe(params => {
-        this.selectedService = params['selectedService'];
-        this.service = params['service'];
-      })
       
       // Mock API
       this._dataService.fetchData().subscribe((data) => {
@@ -237,6 +233,7 @@ export class SelectDateTimeComponent implements OnInit {
       this.selectedDate = null;
     } else {
       this.selectedDate = selectedDate;
+      this._dataService.setSelectedDate(selectedDate);
     }
     console.log(this.selectedDate)
   }
@@ -294,6 +291,7 @@ export class SelectDateTimeComponent implements OnInit {
 
   selectTimeslot(time: any) {
     this.selectedTimeslot = time;
+    this._dataService.setSelectedTimeslot(time);
   }
 
   isTimeSelected(time: any): boolean {
@@ -371,10 +369,6 @@ export class SelectDateTimeComponent implements OnInit {
     })
   }
 
-  goBack() {
-    this.router.navigate(['../../'], { relativeTo:this.route, queryParams: {service: this.service} });
-  }
-
   isCurrentDay(date: { month: string, date: number, day: string}): boolean {
     const currentDate = new Date();
     return (
@@ -405,6 +399,10 @@ export class SelectDateTimeComponent implements OnInit {
 
   getAMPM(hours: number): string {
     return hours >= 12 ? 'PM' : 'AM';
+  }
+
+  goBack() {
+    this.router.navigate(['../../'], { relativeTo:this.route, queryParams: {service: this.service} });
   }
 
   detailsForm() {

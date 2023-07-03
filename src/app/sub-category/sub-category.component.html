@@ -5,7 +5,7 @@
 
     <ng-template #categorySection>
         <div class="container py-5 px-4">
-            <h1>Bath & Grooming</h1>
+            <h1>{{ _dataService.service }}</h1>
             <span class="small">Please select from the options below</span>
             <div class="container d-flex flex-column gap-3 mt-4">
                 <div class="border services" *ngFor="let category of subcategories" (click)="setDate(category)">

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-sub-category',
@@ -38,11 +39,10 @@ export class SubCategoryComponent implements OnInit {
     }
   ];
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute, public _dataService: DataService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.selectedService = params['service'];
       this.showRouterOutlet = false;
     })
   }
@@ -53,10 +53,10 @@ export class SubCategoryComponent implements OnInit {
     const targetUrl = `/category/${categoryId}/${subcategory.id}/select-date`;
 
     this.showRouterOutlet = true;
+    this._dataService.setSelectedService(subcategory.service);
 
     this.router.navigate([targetUrl], {
-      relativeTo: this.route,
-      queryParams: { service: this.selectedService, selectedService: subcategory.service }
+      relativeTo: this.route
     })
   }
 }

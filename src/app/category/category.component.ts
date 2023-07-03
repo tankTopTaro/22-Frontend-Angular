@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-category',
@@ -26,7 +27,7 @@ export class CategoryComponent implements OnInit {
     },
   ]
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute, private _dataService: DataService) { }
 
   ngOnInit(): void {
       
@@ -34,7 +35,8 @@ export class CategoryComponent implements OnInit {
 
   onSelect(category: { id: number, service: string; }) {
     if (category.id === 2) {
-      this.router.navigate([category.id], {relativeTo: this.route, queryParams: { service: category.service }});
+      this._dataService.setService(category.service);
+      this.router.navigate([category.id], {relativeTo: this.route});
     } else {
       this.router.navigate([`${category.id}/page-not-found`], {relativeTo: this.route} );
     }
