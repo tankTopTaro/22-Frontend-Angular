@@ -4,6 +4,7 @@ import { CategoryComponent } from './category/category.component';
 import { SubCategoryComponent } from './sub-category/sub-category.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SelectDateTimeComponent } from './select-date-time/select-date-time.component';
+import { DetailsFormComponent } from './details-form/details-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'category', pathMatch: 'full'},
@@ -13,6 +14,7 @@ const routes: Routes = [
     component: SubCategoryComponent
   },
   { path: 'category/:mainId/:subId/select-date', component: SelectDateTimeComponent },
+  { path: 'category/:mainId/:subId/details-form', component: DetailsFormComponent },
   { path: "**", component: PageNotFoundComponent }
 ];
 
@@ -25,5 +27,6 @@ export const RoutingComponents = [
   CategoryComponent,
   SubCategoryComponent,
   SelectDateTimeComponent,
+  DetailsFormComponent,
   PageNotFoundComponent
 ]

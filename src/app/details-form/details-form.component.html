@@ -1,1 +1,46 @@
-<p>details-form works!</p>
+<div class="container appointment-container shadow-lg">
+    <div class="back container pt-5 px-4 text-start" (click)="goBack()">
+        <div class="d-flex gap-2">
+            <i class="bi bi-arrow-left action"></i> <span class="fw-bold">Back</span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="container d-flex flex-column mt-4">
+            <h1>Enter your details</h1>
+            <span class="small fs-6">Please check your entries. Proceed if all details are correct.</span>
+        </div>
+        <div class="container d-flex flex-column mt-4">
+            <span class="small fs-6">Selected Service</span>
+            <span class="fw-semibold text-lg">Bath & Grooming - Full Groom</span>
+        </div>
+        <div class="container d-flex flex-column mt-3">
+            <span class="small fs-6">Selected Date & Time</span>
+            <span class="fw-semibold text-lg">November 17 2021 - 1:00 PM</span>
+        </div>
+    
+        <div class="container mt-3">
+            <span class="small fs-6">{{ 'enter personal details' | uppercase }}</span>
+
+            <div class="form-floating mb-3 mt-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Name">
+                <label for="floatingInput">Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Mobile Number">
+                <label for="floatingInput">Mobile Number</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="Email (Optional)">
+                <label for="floatingInput">Email</label>
+            </div>
+            <div class="form-floating pb-5">
+                <textarea class="form-control" placeholder="Comments / Remarks (Optional)" id="floatingTextarea"></textarea>
+                <label for="floatingTextarea">Comments / Remarks (Optional)</label>
+            </div>
+
+            <button class="button mb-5" [disabled]="true">
+                Fill out the fields above to proceed
+            </button>
+        </div>
+    </div>
+</div>

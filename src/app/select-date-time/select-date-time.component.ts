@@ -406,4 +406,11 @@ export class SelectDateTimeComponent implements OnInit {
   getAMPM(hours: number): string {
     return hours >= 12 ? 'PM' : 'AM';
   }
+
+  detailsForm() {
+    const mainId = this.route.snapshot.paramMap.get('mainId');
+    const subId = this.route.snapshot.paramMap.get('subId');
+    const targetUrl = `/category/${mainId}/${subId}/details-form`;
+    this.router.navigate([targetUrl], { relativeTo: this.route })
+  }
 }

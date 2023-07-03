@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-details-form',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class DetailsFormComponent {
 
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  goBack() {
+    const mainId = this.route.snapshot.paramMap.get('mainId');
+    const subId = this.route.snapshot.paramMap.get('subId');
+    const targetUrl = `/category/${mainId}/${subId}/select-date`;
+    this.router.navigate([targetUrl], { relativeTo:this.route, });
+  }
 }

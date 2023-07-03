@@ -79,7 +79,7 @@
                 </div>
             </div>
             <div class="container mt-5">
-                <button class="button" [disabled]="!isDateTimeSelected()" [class.enable]="isDateTimeSelected()">
+                <button class="button" [disabled]="!isDateTimeSelected()" (click)="detailsForm()" [class.enable]="isDateTimeSelected()">
                     {{ isDateTimeSelected() ? 'Proceed' : 'Select date and time to proceed' }}
                 </button>
             </div>
