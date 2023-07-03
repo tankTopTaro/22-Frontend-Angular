@@ -35,6 +35,56 @@ h1, .big {
 
 .action {
     color: #FE7401;
+    cursor: pointer;
+}
+
+.btn {
+    color: #fff !important;
+    background: linear-gradient(90deg, rgba(254,116,1,1) 0%, rgba(254,143,2,1) 100%);;
+    width: 100%;
+    height: 60px;
+    padding: 16px 0 16px 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* .calendar {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.calendar-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+ */
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    font-size: 18px;
+}
+
+.date-cell {
+    text-align: center;
+    padding: 5px;
+    background-color: #fff;
+}
+
+.date-cell:hover {
+    color: #FE7401;
+    cursor: pointer;
+}
+
+.weekday {
+    text-align: center;
+    padding: 5px;
+    color: #74728F;
 }
 
 .weekend {
@@ -49,6 +99,7 @@ h1, .big {
     min-height: 100px !important;
     border-radius: 8px;
     text-align: center;
+    cursor: pointer;
 }
 
 .slider-wrap {

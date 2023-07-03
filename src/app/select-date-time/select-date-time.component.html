@@ -12,7 +12,7 @@
         <div class="d-flex flex-column">
             <div class="container d-flex mt-4 justify-content-between">
                 <span class="small">SELECT DATE</span>
-                <span class="action">Open Calendar</span>
+                <span class="action" (click)="openCalendar(content)">Open Calendar</span>
             </div>
             <div class="container mt-3">
                 <div class="container-fluid">
@@ -81,6 +81,39 @@
             </div>
         </div>
     </div>
+
+    <!-- Calendar Modal -->
+    <ng-template #content let-modal>
+        <div class="modal-header d-flex text-center">
+            <h3 class="modal-title small">SELECT CUSTOM DATE</h3>
+            <span class="btn-close small text-sm" aria-label="Close" (click)="modal.dismiss('Cross click')"></span>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <div class="calendar">
+                            <div class="calendar-header d-flex justify-content-between text-center py-3">
+                                <span><i class="bi bi-chevron-left"></i></span>
+                                <h3 class="big">{{ calendar[currentMonth].month }} {{ calendar[currentMonth].year }}</h3>
+                                <span (click)="nextMonth()"><i class="bi bi-chevron-right"></i></span>
+                            </div>
+                            <div class="calendar-grid">
+                                <div class="weekday col" *ngFor="let day of sortDays(calendar[currentMonth].dates[0].day)">{{ day }}</div>
+                                <ng-container *ngFor="let empty of getEmptyCells(calendar[currentMonth].dates[0].day)">
+                                    <div class="date-cell empty"></div>
+                                </ng-container>
+                                <div class="date-cell" *ngFor="let date of calendar[currentMonth].dates">{{ date.date }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn">Confirm</button>
+        </div>
+    </ng-template>
 </div>
 
 
