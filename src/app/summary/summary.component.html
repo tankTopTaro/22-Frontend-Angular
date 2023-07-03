@@ -1,0 +1,53 @@
+<div class="container appointment-container shadow-lg">
+    <div class="back container pt-5 px-4 text-start" (click)="goBack()">
+        <div class="d-flex gap-2">
+            <i class="bi bi-arrow-left action"></i> <span class="fw-bold">Back</span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="container d-flex flex-column mt-4">
+            <h1>Enter your details</h1>
+            <span class="small fs-6">Please check your entries. Proceed if all details are correct.</span>
+        </div>
+        <div class="container d-flex flex-column mt-4">
+            <span class="small fs-6">Selected Service</span>
+            <span class="fw-semibold text-lg">{{ _dataService.details_service }} - {{ details_selectedService }}</span>
+        </div>
+        <div class="container d-flex flex-column mt-3">
+            <span class="small fs-6">Selected Date & Time</span>
+            <span class="fw-semibold text-lg">{{ details_date }} - {{ details_timeslot }}</span>
+        </div>
+    </div>
+    <div class="container mt-3 summary pb-4"> 
+        <div class="container mt-3">
+            <span class="small fs-6">{{ 'personal details' | uppercase }}</span>    
+        
+            <div class="d-flex flex-column gap-2 mt-3">
+                <div>
+                    <span class="small">Name</span>
+                    <p class="fw-semibold ">{{ details_name }}</p>
+                </div>
+                
+                <div>
+                    <span class="small">Mobile Number</span>
+                    <p class="fw-semibold "><!-- (+63) 916-001-1234 --> {{ details_phone }}</p>
+                </div>
+                
+                <div>
+                    <span class="small">Email</span>
+                    <p class="fw-semibold ">{{ details_email }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3 pb-5">
+        <div class="container pb-5">
+            <span class="small">Remarks</span>
+            <p class="fw-semibold">{{ details_comments }}</p>
+        </div>
+        <div class="container d-flex flex-column gap-4 align-items-center">
+            <small class="text-center">By booking an appointment, you agree to our <span class="terms-conditions">Terms &amp; Conditions</span></small>
+            <button class="submit" (click)="book()">Book Appointment</button>
+        </div>
+    </div>
+</div>

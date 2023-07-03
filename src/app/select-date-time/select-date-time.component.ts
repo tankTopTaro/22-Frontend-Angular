@@ -113,7 +113,7 @@ export class SelectDateTimeComponent implements OnInit {
   ngOnInit(): void {
       
       // Mock API
-      this._dataService.fetchData().subscribe((data) => {
+    this._dataService.fetchData().subscribe((data) => {
         this.isLoading = false;
         this._data = data;
         this.generateDatesArray();
@@ -235,7 +235,6 @@ export class SelectDateTimeComponent implements OnInit {
       this.selectedDate = selectedDate;
       this._dataService.setSelectedDate(selectedDate);
     }
-    console.log(this.selectedDate)
   }
 
   isDateSelected(date: { month: string, date: number, day: string }): boolean {
@@ -402,7 +401,7 @@ export class SelectDateTimeComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['../../'], { relativeTo:this.route, queryParams: {service: this.service} });
+    this.router.navigate(['../../'], { relativeTo:this.route});
   }
 
   detailsForm() {

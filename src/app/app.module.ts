@@ -3,22 +3,26 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NextDateDirective } from './next-date.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
+import { SummaryComponent } from './summary/summary.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoutingComponents,
     NextDateDirective,
+    SummaryComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
