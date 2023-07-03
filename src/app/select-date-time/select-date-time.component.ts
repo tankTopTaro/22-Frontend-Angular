@@ -91,6 +91,7 @@ export class SelectDateTimeComponent implements OnInit {
   dates: { month: string, date: number, day: string }[] = [];
   currentDateIndex: number = -1;
   currentMonth: number = 0;
+  selectedDate: Date | null = null;
 
   disableButton: boolean = true;
   isLoading: boolean = true;
@@ -216,6 +217,57 @@ export class SelectDateTimeComponent implements OnInit {
     if (this.currentMonth < this.calendar.length - 1) {
       this.currentMonth++;
     }
+  }
+
+  prevMonth() {
+    const currentDate = new Date();
+    const thisMonth = currentDate.getMonth();
+
+    if (this.currentMonth === thisMonth) {
+      return;
+    }
+
+    this.currentMonth--;
+  }
+
+  selectDate(date: { month: string, date: number, day: string }) {
+    const selectedDate = new Date(date.month + ' ' + date.date + ' ' + this.calendar[this.currentMonth].year);
+
+    if (this.selectedDate && this.selectedDate?.getTime() === selectedDate.getTime()) {
+      this.selectedDate = null;
+    } else {
+      this.selectedDate = selectedDate;
+    }
+  }
+
+  isDateSelected(date: { month: string, date: number, day: string }): boolean {
+    if (this.selectedDate) {
+      return (
+        this.selectedDate.getFullYear() === this.calendar[this.currentMonth].year &&
+        this.selectedDate.getMonth() === this.currentMonth &&
+        this.selectedDate.getDate() === date.date
+      );
+    }
+    return false;
+  }
+
+  isDateDisabled(date: { month: string, date: number, day: string }): boolean {
+    const currentDate = new Date();
+    const selectedDate = new Date(date.month + ' ' + date.date + ', ' + this.calendar[this.currentMonth].year);
+
+    currentDate.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    return selectedDate.getTime() < currentDate.getTime();
+  }
+
+  isToday(date: { month: string, date: number, day: string }): boolean {
+    const currentDate = new Date();
+    const selectedDate = new Date(date.month + ' ' + date.date + ', ' + this.calendar[this.currentMonth].year);
+
+    currentDate.setHours(0, 0, 0, 0);
+
+    return currentDate.getTime() === selectedDate.getTime();
   }
 
   getEmptyCells(day: string): any[] {
